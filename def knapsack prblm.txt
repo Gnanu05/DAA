@@ -1,0 +1,20 @@
+def knapsack_greedy(weights, values, capacity):
+    n = len(weights)
+    ratios = [(values[i] / weights[i], weights[i], values[i]) for i in range(n)]
+    total_value = 0
+    total_weight = 0
+    items_in_knapsack = []
+    for ratio, weight, value in ratios:
+        if total_weight + weight <= capacity:
+            total_weight += weight
+            total_value += value
+            items_in_knapsack.append((weight, value))
+    return total_value, items_in_knapsack
+weights = [10, 20, 30]
+values = [60, 100, 120]
+capacity = 50
+total_value, items_in_knapsack = knapsack_greedy(weights, values, capacity)
+print("Total value:", total_value)
+print("Items in Knapsack:")
+for weight, value in items_in_knapsack:
+    print("Weight:", weight, "Value:", value)

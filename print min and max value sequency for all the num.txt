@@ -1,0 +1,8 @@
+def print_min_max_sequence(lst):
+    for num_list in lst:
+        min_num = min(num_list)
+        max_num = max(num_list)
+        print(f"Minimum value for sequence {num_list}: {min_num}")
+        print(f"Maximum value for sequence {num_list}: {max_num}")
+list_of_numbers = [[1, 2, 3, 4], [10, 20, 30], [5, 10, 15, 20, 25]]
+print_min_max_sequence(list_of_numbers)
