@@ -1,0 +1,10 @@
+def reverse_number(num):
+    if num < 10:
+        return num
+    last_digit = num % 10
+    remaining_num = num // 10
+    reversed_remaining = reverse_number(remaining_num)
+    return int(str(last_digit) + str(reversed_remaining))
+num = 12345
+print("Original number:", num)
+print("Reversed number:", reverse_number(num))

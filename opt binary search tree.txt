@@ -1,0 +1,22 @@
+import sys
+def optimal_bst(keys, freq):
+    n = len(keys)
+    cost = [[0] * (n + 1) for _ in range(n + 1)]
+    for i in range(n):
+        cost[i][i] = freq[i]
+    for L in range(1, n + 1):
+        for i in range(n - L + 1):
+            j = i + L - 1
+            cost[i][j] = sys.maxsize
+            for r in range(i, j + 1):
+                c = 0 if r > i else cost[i][r - 1]
+                c += 0 if r < j else cost[r + 1][j]
+                for k in range(i, j + 1):
+                    c += freq[k]
+                if c < cost[i][j]:
+                    cost[i][j] = c
+
+    return cost[0][n - 1]
+keys = [10, 12, 20]
+freq = [34, 8, 50]
+print("The cost of optimal binary search tree is", optimal_bst(keys, freq))

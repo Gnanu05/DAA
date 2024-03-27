@@ -1,0 +1,22 @@
+import sys
+
+def tsp(graph):
+    n = len(graph)
+    dp = [[-1] * (1 << n) for _ in range(n)]
+    for i in range(n):
+        dp[i][1 << i] = 0
+    def solve_tsp(curr, visited):
+        if visited == (1 << n) - 1:
+            return graph[curr][0]
+        if dp[curr][visited] != -1:
+            return dp[curr][visited]
+        min_distance = sys.maxsize
+        for next_city in range(n):
+            if visited & (1 << next_city) == 0: 
+                distance = graph[curr][next_city] + solve_tsp(next_city, visited | (1 << next_city))
+                min_distance = min(min_distance, distance)
+        dp[curr][visited] = min_distance
+        return min_distance
+    return solve_tsp(0, 1)
+graph = [
+    [0, 
